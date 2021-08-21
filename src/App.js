@@ -1,14 +1,25 @@
 import './App.css';
 import Todo from './Todo'
 import React, { useState, useEffect } from 'react'
-import { Button, FormControl, FormHelperText, Input, InputLabel } from '@material-ui/core';
+import { Button, FormControl, FormHelperText, Input, InputLabel, makeStyles } from '@material-ui/core';
 import db from './firebase';
 import firebase from 'firebase';
 
+const useStyles = makeStyles((theme) => ({
+  center: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  styleTodo: {
+    border: '2px solid blue',
+  }
+}));
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
-
+  const classes = useStyles();
   //when the app loads, we need to listen to database and fetch new todos as they added or removed
 
   useEffect(() => {
@@ -30,9 +41,9 @@ function App() {
   return (
     <div className="App">
       <h1>Todo App </h1>
-      <form>
+      <form className={classes.center}>
         {/* <input  /> */}
-        <FormControl>
+        <FormControl >
           <InputLabel>Enter TODO</InputLabel>
           <Input value={input} onChange={event => setInput(event.target.value)} />
           {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
